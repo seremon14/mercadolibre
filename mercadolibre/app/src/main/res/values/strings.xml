@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Mercadolibre</string>
+    <string name="TituloBusqueda">Busca productos, marcas y más...</string>
+    <string name="Bienvenido">Bienvenido, Sebastian</string>
 </resources>

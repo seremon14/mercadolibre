@@ -1,19 +1,17 @@
 package com.seremon.mercadolibre
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Window
-import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 
-class MainActivity : AppCompatActivity() {
+class ResultAntivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //val customTitleSupported =  requestWindowFeature(Window.FEATURE_CUSTOM_TITLE)
         setContentView(R.layout.activity_main)
 
         //if (customTitleSupported) {
-            supportActionBar!!.hide()
+        supportActionBar!!.hide()
         //}
 
         val txtWelcome = findViewById<TextView>(R.id.txtWelcome);
