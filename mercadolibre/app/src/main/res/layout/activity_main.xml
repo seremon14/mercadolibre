@@ -58,7 +58,7 @@
             android:minWidth="200dp"></EditText>
 
         <ImageButton
-            android:id="@+id/button"
+            android:id="@+id/btnSearch"
             android:layout_width="64dp"
             android:layout_height="56dp"
             android:layout_gravity="right"

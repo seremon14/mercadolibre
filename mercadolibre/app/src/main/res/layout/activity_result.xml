@@ -7,5 +7,8 @@
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
+        android:dividerHeight="25dp"
         app:layoutManager="LinearLayoutManager"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
