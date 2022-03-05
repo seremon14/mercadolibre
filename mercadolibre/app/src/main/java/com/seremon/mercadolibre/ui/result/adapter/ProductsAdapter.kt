@@ -6,18 +6,18 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.seremon.mercadolibre.Model.Product
+import com.seremon.mercadolibre.Model.Product2
 import java.text.NumberFormat
 
-class ProductsAdapter (private val products: List<Product>, private val onClick: (Product) -> Unit) : RecyclerView.Adapter<ProductViewHolder>(){
+class ProductsAdapter (private val products: List<Product2>, private val onClick: (Product2) -> Unit) : RecyclerView.Adapter<Product2ViewHolder>(){
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Product2ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.product_item, parent, false)
-        return ProductViewHolder(view, onClick)
+        return Product2ViewHolder(view, onClick)
     }
 
-    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: Product2ViewHolder, position: Int) {
         val product = products[position]
         holder.bind(product)
     }
@@ -25,14 +25,14 @@ class ProductsAdapter (private val products: List<Product>, private val onClick:
     override fun getItemCount() = products.size
 }
 
-/* ViewHolder for Product, takes in the inflated view and the onClick behavior. */
-class ProductViewHolder(itemView: View, val onClick: (Product) -> Unit) :
+/* ViewHolder for Product2, takes in the inflated view and the onClick behavior. */
+class Product2ViewHolder(itemView: View, val onClick: (Product2) -> Unit) :
     RecyclerView.ViewHolder(itemView) {
     private val productTextView: TextView = itemView.findViewById(R.id.txtTitle)
     private val productImageView: ImageView = itemView.findViewById(R.id.imgProduct)
     private val productDescription: TextView = itemView.findViewById(R.id.txtDescription)
     private val productPrice: TextView = itemView.findViewById(R.id.txtPrice)
-    private var currentProduct: Product? = null
+    private var currentProduct2: Product2? = null
     private val numberFormat = NumberFormat.getCurrencyInstance()
 
     init {
@@ -40,15 +40,15 @@ class ProductViewHolder(itemView: View, val onClick: (Product) -> Unit) :
         numberFormat.maximumFractionDigits = 0;
 
         itemView.setOnClickListener {
-            currentProduct?.let {
+            currentProduct2?.let {
                 onClick(it)
             }
         }
     }
 
     /* Bind product name and image. */
-    fun bind(product: Product) {
-        currentProduct = product
+    fun bind(product: Product2) {
+        currentProduct2 = product
 
         productTextView.text = product.name
         productDescription.text = product.description

@@ -1,12 +1,14 @@
-package com.seremon.mercadolibre
+package com.seremon.mercadolibre.ui.result
 
 import android.content.Intent
-import android.content.res.Resources
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.seremon.mercadolibre.Model.Product
+import com.seremon.mercadolibre.Model.Product2
 import com.seremon.mercadolibre.Model.productList
+import com.seremon.mercadolibre.ProductsAdapter
+import com.seremon.mercadolibre.R
+import com.seremon.mercadolibre.ui.detail.DetailActivity
 
 class ResultActivity : AppCompatActivity() {
 
@@ -26,7 +28,7 @@ class ResultActivity : AppCompatActivity() {
     }
 
     /* Opens ProductDetailActivity when RecyclerView item is clicked. */
-    private fun adapterOnClick(product: Product) {
+    private fun adapterOnClick(product: Product2) {
         val intent = Intent(this, DetailActivity()::class.java)
         intent.putExtra(PRODUCT_ID, product.id)
         startActivity(intent)

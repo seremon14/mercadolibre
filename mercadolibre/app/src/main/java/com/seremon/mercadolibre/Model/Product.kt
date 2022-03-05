@@ -2,7 +2,7 @@ package com.seremon.mercadolibre.Model
 
 import androidx.annotation.DrawableRes
 
-class Product (
+class Product2 (
     val id: Long,
     val name: String,
     @DrawableRes
