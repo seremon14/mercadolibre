@@ -16,6 +16,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.seremon.mercadolibre.R
 import com.seremon.mercadolibre.app.model.Product
+import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.product_item.view.*
 import java.text.NumberFormat
 
@@ -41,9 +42,16 @@ class ProductsAdapter (private val products: List<Product>, private val listener
         holder.price.text = numberFormat.format(products[position].price)
 
 
-        val a = products[position].installments!!.quantity
-        val b = numberFormat.format(products[position].installments!!.amount)
-        holder.installments.text = "en $a coutas de $b"
+        if(products[position].installments != null && (products[position].installments!!.quantity != null || products[position].installments!!.amount != null)) {
+            holder.installments.visibility = View.VISIBLE
+            val a = products[position].installments!!.quantity
+            val b = numberFormat.format(products[position].installments!!.amount)
+            holder.installments.text = "en $a coutas de $b"
+        }
+        else {
+            holder.installments.visibility = View.GONE
+        }
+
         holder.description.visibility =
             if (products[position].acceptsMercadopago!!){
                 View.VISIBLE

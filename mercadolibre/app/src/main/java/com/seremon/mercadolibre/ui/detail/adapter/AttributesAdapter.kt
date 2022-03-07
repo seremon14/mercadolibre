@@ -8,7 +8,7 @@ import com.seremon.mercadolibre.R
 import com.seremon.mercadolibre.app.model.Attributes
 import kotlinx.android.synthetic.main.attribute_item.view.*
 
-class AttributesAdapter (private val attributes: List<Attributes>) :
+class AttributesAdapter(private val attributes: List<Attributes>) :
     RecyclerView.Adapter<AttributesAdapter.AttributesViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AttributesViewHolder {
