@@ -2,7 +2,7 @@ package com.seremon.mercadolibre.ui.main
 
 import com.seremon.mercadolibre.app.model.Product
 
-class MainPresenter(private val router: MainContract.Router, private val interactor: MainInteractor) :
+class MainPresenter(private val router: MainContract.Router) :
     MainContract.Presenter {
 
     private var view: MainContract.View? = null
@@ -13,27 +13,17 @@ class MainPresenter(private val router: MainContract.Router, private val interac
 
     override fun unbindView() {
         view = null
-        interactor.dispose()
     }
 
-    override fun onViewCreated() {
-        view?.showLoading()
-        interactor.getProducts({
-            view?.hideLoading()
-            //view?.publishData(it)
-        }, this::onError)
-    }
-
-    override fun onItemClicked(product: Product) {
-        router.openDetailProduct(product)
+    override fun onClickSearch(criteria: String?) {
+        if(criteria.isNullOrEmpty() || criteria.isNullOrBlank()){
+            view!!.showMessage("Ingresa un criterio de búsqueda")
+        }else{
+            router.openResult(criteria)
+        }
     }
 
     override fun onBackClicked() {
         router.finish()
-    }
-
-    private fun onError(error: Throwable) {
-        view?.hideLoading()
-        error.message?.let { view?.showMessage(it) }
     }
 }

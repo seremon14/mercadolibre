@@ -35,7 +35,16 @@
             android:typeface="normal" />
 
         <TextView
-            android:id="@+id/txtDescription"
+            android:id="@+id/txtPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorBlack"
+            android:text="$ 500.000"
+            android:textSize="24dp" />
+
+        <TextView
+            android:id="@+id/txtInstallments"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -44,13 +53,13 @@
             android:textSize="11dp" />
 
         <TextView
-            android:id="@+id/txtPrice"
+            android:id="@+id/txtDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:textColor="@color/colorBlack"
-            android:text="$ 500.000"
-            android:textSize="24dp" />
+            android:text="@string/acepta_mercadopago"
+            android:textSize="11dp" />
 
     </LinearLayout>
 

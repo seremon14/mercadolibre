@@ -1,20 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.denzcoskun.imageslider.ImageSlider
-        android:id="@+id/image_slider"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:iss_auto_cycle="false"
-        app:iss_period="3000"
-        app:iss_delay="0"
-        android:background="@drawable/round_yellow_button"
-        android:layout_margin="20dp">
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/layInfo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:padding="20dp">
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mto G Dual SIM 128GB"
+                android:textSize="19dp"
+                android:textColor="@color/colorBlack"
+                android:textStyle="bold"
+                android:typeface="normal" />
+            <com.denzcoskun.imageslider.ImageSlider
+                android:id="@+id/imageSlider"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:iss_auto_cycle="false"
+                app:iss_period="3000"
+                app:iss_delay="0"
+                android:background="@drawable/round_yellow_button"
+                android:layout_marginTop="5dp">
+            </com.denzcoskun.imageslider.ImageSlider>
+            <TextView
+                android:id="@+id/txtPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/colorBlack"
+                android:text="$ 500.000"
+                android:textSize="30dp" />
 
-    </com.denzcoskun.imageslider.ImageSlider>
-</LinearLayout>
+            <TextView
+                android:id="@+id/txtInstallments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack"
+                android:text="Hasta 48 cuotas"
+                android:textSize="15dp" />
+
+            <Button
+                android:id="@+id/btnBuyNow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/comprar_ahora"
+                android:background="@color/colorPrimaryDark"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/text_shadow_white" />
+
+            <Button
+                android:id="@+id/btnAddCar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/anadir_al_carrito"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorBorderGray" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorBorderGray">
+
+            </View>
+
+            <TextView
+                android:id="@+id/txtAttributes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorBlack"
+                android:text="@string/caracteristicas"
+                android:layout_marginTop="20dp"
+                android:textSize="20dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none"
+                android:layout_marginTop="10dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorBorderGray">
+
+            </View>
+        </LinearLayout>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -1,63 +1,94 @@
-package com.seremon.mercadolibre
+package com.seremon.mercadolibre.ui.result.adapter
 
+import android.annotation.SuppressLint
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.os.AsyncTask
+import android.os.Build
+import android.text.Html
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.seremon.mercadolibre.Model.Product2
+import com.seremon.mercadolibre.R
+import com.seremon.mercadolibre.app.model.Product
+import kotlinx.android.synthetic.main.product_item.view.*
 import java.text.NumberFormat
 
-class ProductsAdapter (private val products: List<Product2>, private val onClick: (Product2) -> Unit) : RecyclerView.Adapter<Product2ViewHolder>(){
+@SuppressLint("StaticFieldLeak")
+@Suppress("DEPRECATION")
+class ProductsAdapter (private val products: List<Product>, private val listener: ProductListener) :
+    RecyclerView.Adapter<ProductsAdapter.ProductViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Product2ViewHolder {
+    private val numberFormat = NumberFormat.getCurrencyInstance()
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.product_item, parent, false)
-        return Product2ViewHolder(view, onClick)
+        return ProductViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: Product2ViewHolder, position: Int) {
-        val product = products[position]
-        holder.bind(product)
+    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
+        numberFormat.maximumFractionDigits = 0;
+
+
+        DownloadImageFromInternet(holder.imgProduct).execute(products[position].thumbnail)
+        holder.title.text = products[position].title!!.trim()
+        holder.price.text = numberFormat.format(products[position].price)
+
+
+        val a = products[position].installments!!.quantity
+        val b = numberFormat.format(products[position].installments!!.amount)
+        holder.installments.text = "en $a coutas de $b"
+        holder.description.visibility =
+            if (products[position].acceptsMercadopago!!){
+                View.VISIBLE
+            } else{
+                View.INVISIBLE
+            }
+
+        holder.itemView.setOnClickListener { listener.onItemClick(products[position]) }
     }
 
     override fun getItemCount() = products.size
-}
 
-/* ViewHolder for Product2, takes in the inflated view and the onClick behavior. */
-class Product2ViewHolder(itemView: View, val onClick: (Product2) -> Unit) :
-    RecyclerView.ViewHolder(itemView) {
-    private val productTextView: TextView = itemView.findViewById(R.id.txtTitle)
-    private val productImageView: ImageView = itemView.findViewById(R.id.imgProduct)
-    private val productDescription: TextView = itemView.findViewById(R.id.txtDescription)
-    private val productPrice: TextView = itemView.findViewById(R.id.txtPrice)
-    private var currentProduct2: Product2? = null
-    private val numberFormat = NumberFormat.getCurrencyInstance()
+    inner class ProductViewHolder(itemView: View) :
+        RecyclerView.ViewHolder(itemView) {
 
-    init {
+        val imgProduct = itemView.imgProduct!!
+        val title = itemView.txtTitle!!
+        val description = itemView.txtDescription!!
+        val price = itemView.txtPrice!!
+        val installments = itemView.txtInstallments!!
+    }
 
-        numberFormat.maximumFractionDigits = 0;
+    interface ProductListener {
+        fun onItemClick(product: Product)
+    }
 
-        itemView.setOnClickListener {
-            currentProduct2?.let {
-                onClick(it)
+    private inner class DownloadImageFromInternet(var imageView: ImageView) : AsyncTask<String, Void, Bitmap?>() {
+
+        override fun doInBackground(vararg urls: String): Bitmap? {
+            val imageURL = urls[0]
+            var image: Bitmap? = null
+            try {
+                val stream = java.net.URL(imageURL).openStream()
+                image = BitmapFactory.decodeStream(stream)
             }
+            catch (e: Exception) {
+                Log.e("Error Message", e.message.toString())
+                e.printStackTrace()
+            }
+            return image
+        }
+
+        override fun onPostExecute(result: Bitmap?) {
+            imageView.setImageBitmap(result)
         }
     }
 
-    /* Bind product name and image. */
-    fun bind(product: Product2) {
-        currentProduct2 = product
-
-        productTextView.text = product.name
-        productDescription.text = product.description
-        productPrice.text = numberFormat.format(product.price)
-
-        if (product.image != null) {
-            productImageView.setImageResource(product.image)
-        } else {
-            productImageView.setImageResource(R.mipmap.ic_user)
-        }
-    }
 }

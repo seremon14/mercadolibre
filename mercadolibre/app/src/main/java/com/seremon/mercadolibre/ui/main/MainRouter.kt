@@ -8,7 +8,7 @@ class MainRouter(private val activity: MainActivity) : MainContract.Router {
         activity.finish()
     }
 
-    override fun openDetailProduct(data: Product) {
-        //ResultActivity.launch(activity, data)
+    override fun openResult(criteria: String?) {
+        ResultActivity.launch(activity, criteria)
     }
 }

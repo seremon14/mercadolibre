@@ -1,8 +1,9 @@
 package com.seremon.mercadolibre.ui.detail
 
+import com.seremon.mercadolibre.R
 import com.seremon.mercadolibre.app.model.Product
 
-class DetailPresenter(private val router: DetailContract.Router) : DetailContract.Presenter {
+class DetailPresenter(private val router: DetailContract.Router, private val interactor: DetailInteractor) : DetailContract.Presenter {
 
     private var view: DetailContract.View? = null
 
@@ -15,15 +16,30 @@ class DetailPresenter(private val router: DetailContract.Router) : DetailContrac
     }
 
     override fun onViewCreated(product: Product) {
-        view?.publishData(product)
+        view?.showLoading()
+        interactor.getDetailProduct(
+            product.id,
+            {
+                view?.hideLoading()
+                view?.publishData(it[0].body!!)
+            },
+            this::onError)
+
+        //view?.publishData(product)
     }
 
     override fun onEmptyData(msg: Int) {
         view?.showMessage(msg)
-        router.finish()
+        router.back()
     }
 
     override fun onBackClicked() {
-        router.finish()
+        router.back()
+    }
+
+    private fun onError(error: Throwable) {
+        view?.hideLoading()
+        error.message?.let { view?.showMessage(R.string.empty_info) }
+        router.back()
     }
 }

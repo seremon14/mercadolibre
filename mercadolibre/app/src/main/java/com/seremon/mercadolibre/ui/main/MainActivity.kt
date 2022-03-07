@@ -14,6 +14,7 @@ import com.seremon.mercadolibre.ui.main.di.DaggerMainComponent
 import com.seremon.mercadolibre.ui.main.di.MainComponent
 import com.seremon.mercadolibre.ui.main.di.MainModule
 import com.seremon.mercadolibre.ui.result.ResultActivity
+import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), MainContract.View {
@@ -43,7 +44,6 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         initView()
         component.inject(this)
         presenter.bindView(this)
-        presenter.onViewCreated()
     }
 
     override fun onDestroy() {
@@ -51,37 +51,18 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         presenter.unbindView()
     }
 
-    override fun showLoading() {
-        //recyclerView.visibility = View.GONE
-        //progressBar.visibility = View.VISIBLE
-    }
-
-    override fun hideLoading() {
-        //recyclerView.visibility = View.VISIBLE
-        //progressBar.visibility = View.GONE
-    }
-
     override fun showMessage(msg: String) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
     }
 
     private fun initView() {
-        //if (customTitleSupported) {
-        supportActionBar!!.hide()
-        //}
 
-        val txtWelcome = findViewById<TextView>(R.id.txtWelcome);
         txtWelcome.text = resources.getString(R.string.Bienvenido);
-        val txtSubtitle = findViewById<TextView>(R.id.txtSubtitle);
         txtSubtitle.text = resources.getString(R.string.TituloBusqueda);
 
         val btnSearch = findViewById<ImageButton>(R.id.btnSearch);
         btnSearch.setOnClickListener{
-            NextScreen()
+            presenter.onClickSearch(txtSearch.text.toString())
         }
-    }
-
-    private fun NextScreen(){
-        startActivity(Intent(this, ResultActivity::class.java))
     }
 }

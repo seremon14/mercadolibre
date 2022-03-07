@@ -12,6 +12,7 @@
         android:id="@+id/txtWelcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/imgUser"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imgUser"
@@ -34,6 +35,9 @@
         android:id="@+id/txtSubtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textSize="30dp"
+        android:textColor="@color/colorBlack"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgUser"
@@ -44,16 +48,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginTop="10dp"
         android:weightSum="1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtSubtitle">
 
         <EditText
+            android:id="@+id/txtSearch"
             android:layout_width="wrap_content"
             android:layout_height="56dp"
             android:layout_gravity="left"
             android:layout_weight="1"
+            android:padding="5dp"
             android:background="@drawable/rounded_edittext"
             android:minWidth="200dp"></EditText>
 
@@ -64,7 +71,7 @@
             android:layout_gravity="right"
             android:layout_marginLeft="10dp"
             android:src="@drawable/ic_search"
-            android:tint="@color/colorBlack"
+            android:tint="@color/text_shadow_white"
             android:background="@drawable/round_yellow_button"></ImageButton>
 
     </LinearLayout>

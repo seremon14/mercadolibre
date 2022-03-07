@@ -3,4 +3,9 @@
     <string name="TituloBusqueda">Busca productos, marcas y más...</string>
     <string name="Bienvenido">Bienvenido, Sebastian</string>
     <string name="ProductName">Product name</string>
+    <string name="acepta_mercadopago">Acepta Mercadopago</string>
+    <string name="comprar_ahora">Comprar ahora</string>
+    <string name="anadir_al_carrito">Añadir al carrito</string>
+    <string name="caracteristicas">Características</string>
+    <string name="empty_info">No se pudo cargar la información</string>
 </resources>
